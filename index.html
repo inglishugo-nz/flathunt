@@ -3,543 +3,726 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flat Hunt Dashboard - 26 Feb 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>FLATHUNT.EXE - Property Search v1.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #F7F7F8;
-            --surface-color: #FFFFFF;
-            --text-main: #111827;
-            --text-muted: #6B7280;
-            --border-color: #E5E7EB;
-            --border-hover: #D1D5DB;
-            --accent: #1D4ED8;
-            --accent-hover: #1E40AF;
-
-            /* Status Colors */
-            --success-bg: #ECFDF5;
-            --success-text: #059669;
-            --warning-bg: #FEF3C7;
-            --warning-text: #D97706;
-            --danger-bg: #FEF2F2;
-            --danger-text: #DC2626;
-            --neutral-bg: #F3F4F6;
-            --neutral-text: #4B5563;
+            --terminal-black: #0D0D0D;
+            --terminal-green: #00FF41;
+            --terminal-blue: #0066FF;
+            --hot-pink: #FF006E;
+            --safety-yellow: #FFBE0B;
+            --brutalist-grey: #D9D9D9;
+            --window-grey: #C0C0C0;
+            --border-dark: #808080;
+            --border-light: #FFFFFF;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background: var(--bg-color);
-            color: var(--text-main);
-            padding: 24px;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--terminal-black);
+            color: var(--terminal-green);
+            padding: 20px;
+            line-height: 1.4;
+            cursor: default;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* RETRO WINDOW CHROME */
+        .window {
+            background: var(--window-grey);
+            border: 3px solid;
+            border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+            margin-bottom: 20px;
         }
 
-        /* --- Header --- */
-        .header {
-            margin-bottom: 24px;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        .stats-grid {
+        .window-title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            padding: 4px 6px;
             display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
         }
 
-        .stat-card {
-            background: var(--surface-color);
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            font-size: 14px;
+        .window-title {
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-        }
-
-        .stat-card strong {
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .stat-card span {
-            color: var(--text-muted);
-        }
-
-        /* --- Filters --- */
-        .filters {
-            background: var(--surface-color);
-            padding: 16px 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 24px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            align-items: flex-end;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
             gap: 6px;
         }
 
-        .filter-group label {
+        .window-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .window-btn {
+            width: 18px;
+            height: 18px;
+            background: var(--window-grey);
+            border: 2px solid;
+            border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
+            font-weight: bold;
+            cursor: pointer;
+            color: black;
+        }
+
+        .window-btn:active {
+            border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+        }
+
+        .window-content {
+            padding: 16px;
+            background: var(--window-grey);
+            color: black;
+        }
+
+        /* HEADER - TERMINAL STYLE */
+        .terminal-header {
+            background: var(--terminal-black);
+            color: var(--terminal-green);
+            padding: 20px;
+            font-family: 'Space Mono', monospace;
+            border: 3px solid var(--terminal-green);
+            margin-bottom: 20px;
+        }
+
+        .terminal-prompt {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .terminal-prompt::before {
+            content: '> ';
+            color: var(--hot-pink);
+        }
+
+        .ascii-title {
+            font-size: 11px;
+            line-height: 1.2;
+            color: var(--terminal-green);
+            white-space: pre;
+            margin-bottom: 12px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--terminal-green);
+        }
+
+        .stat-item {
+            display: flex;
+            gap: 6px;
+        }
+
+        .stat-label {
+            color: var(--brutalist-grey);
+        }
+
+        .stat-value {
+            color: var(--terminal-green);
+            font-weight: bold;
+        }
+
+        /* FILTERS - SYSTEM SETTINGS PANEL */
+        .filter-panel {
+            background: var(--brutalist-grey);
+            padding: 12px;
+            border: 4px solid black;
+        }
+
+        .filter-title {
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 13px;
+            border-bottom: 2px solid black;
+            padding-bottom: 4px;
+        }
+
+        .filter-title::before {
+            content: '⚙ ';
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-family: 'Space Mono', monospace;
         }
 
         .filter-group select {
-            appearance: none;
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 8px 32px 8px 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-main);
+            width: 100%;
+            padding: 6px;
+            border: 3px solid black;
+            background: white;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
             cursor: pointer;
-            outline: none;
-            transition: border-color 0.2s;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 8px center;
-        }
-
-        .filter-group select:hover {
-            border-color: var(--border-hover);
         }
 
         .filter-group select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.1);
+            outline: 3px solid var(--hot-pink);
+            outline-offset: -3px;
         }
 
-        .reset-btn {
+        .btn-brutalist {
             padding: 8px 16px;
-            background: var(--neutral-bg);
-            color: var(--neutral-text);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            background: var(--hot-pink);
+            color: white;
+            border: 4px solid black;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            font-size: 12px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            height: 38px;
-            transition: all 0.2s;
+            text-transform: uppercase;
+            transition: all 0.1s;
         }
 
-        .reset-btn:hover {
-            background: var(--border-color);
-            color: var(--text-main);
+        .btn-brutalist:hover {
+            background: var(--safety-yellow);
+            color: black;
         }
 
-        /* --- Table/List Container --- */
-        .table-container {
-            background: var(--surface-color);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        .btn-brutalist:active {
+            transform: translate(2px, 2px);
+        }
+
+        /* TABLE - FILE BROWSER STYLE */
+        .file-browser {
+            background: white;
+            border: 4px solid black;
             overflow-x: auto;
+        }
+
+        .file-browser-header {
+            background: var(--brutalist-grey);
+            padding: 8px;
+            border-bottom: 3px solid black;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: bold;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
+            font-size: 13px;
         }
 
         th {
-            background: #FAFAFA;
-            padding: 14px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
+            background: var(--brutalist-grey);
+            padding: 10px 8px;
+            text-align: left;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 3px solid black;
+            border-right: 2px solid var(--border-dark);
             cursor: pointer;
             user-select: none;
-            white-space: nowrap;
-            transition: background 0.2s;
         }
 
-        th:hover { background: #F3F4F6; color: var(--text-main); }
+        th:last-child {
+            border-right: none;
+        }
 
-        th.sortable { position: relative; padding-right: 24px; }
+        th:hover {
+            background: var(--safety-yellow);
+        }
 
         th.sortable::after {
-            content: '↕';
-            position: absolute;
-            right: 8px;
-            color: var(--border-hover);
-            font-size: 14px;
+            content: ' ▲▼';
+            color: var(--border-dark);
+            font-size: 8px;
         }
-        th.sorted-asc::after { content: '↑'; color: var(--text-main); }
-        th.sorted-desc::after { content: '↓'; color: var(--text-main); }
+
+        th.sorted-asc::after {
+            content: ' ▲';
+            color: black;
+        }
+
+        th.sorted-desc::after {
+            content: ' ▼';
+            color: black;
+        }
 
         tr {
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.2s;
+            border-bottom: 1px solid var(--brutalist-grey);
         }
-        tr:last-child { border-bottom: none; }
-        tr:hover { background: #F9FAFB; }
 
-        /* Top 5 Highlight */
-        tr.top-pick {
-            border-left: 4px solid var(--warning-text);
-            background: #FFFBED;
+        tr:hover {
+            background: #FFFFCC;
         }
+
+        tr.top-pick {
+            background: #FFE6F0;
+            border-left: 6px solid var(--hot-pink);
+        }
+
         tr.top-pick:hover {
-            background: #FEF3C7;
+            background: #FFD6E8;
         }
 
         td {
-            padding: 16px;
-            font-size: 14px;
+            padding: 12px 8px;
             vertical-align: middle;
-            color: var(--text-main);
+            border-right: 1px solid var(--brutalist-grey);
         }
 
-        /* Thumbnail Image */
-        .img-cell { width: 90px; }
-        .property-img {
-            width: 80px;
-            height: 60px;
-            border-radius: 6px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-            background: var(--neutral-bg);
-            display: block;
+        td:last-child {
+            border-right: none;
         }
 
-        /* Typographic elements */
-        .address-link {
-            font-weight: 600;
-            color: var(--text-main);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 4px;
-            transition: color 0.2s;
-        }
-        .address-link:hover { color: var(--accent); text-decoration: underline; }
-
-        .sub-text {
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-
-        .price-text {
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        /* Badges & Scores */
-        .score-pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        /* BADGES & SCORES */
+        .score-box {
+            display: inline-block;
             padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 13px;
-            min-width: 48px;
+            border: 3px solid black;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 50px;
+            text-align: center;
         }
-        .score-excellent { background: var(--success-bg); color: var(--success-text); }
-        .score-good { background: var(--warning-bg); color: var(--warning-text); }
-        .score-fair { background: var(--danger-bg); color: var(--danger-text); }
-        .score-unknown { background: var(--neutral-bg); color: var(--neutral-text); }
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            margin-left: 8px;
-            vertical-align: middle;
+        .score-excellent {
+            background: var(--terminal-green);
+            color: black;
         }
-        .badge-new { background: #DBEAFE; color: #1D4ED8; }
-        .badge-top { background: var(--warning-bg); color: var(--warning-text); border: 1px solid #FCD34D; }
+
+        .score-good {
+            background: var(--safety-yellow);
+            color: black;
+        }
+
+        .score-fair {
+            background: var(--hot-pink);
+            color: white;
+        }
+
+        .score-unknown {
+            background: var(--brutalist-grey);
+            color: black;
+        }
+
+        .badge-brutal {
+            display: inline-block;
+            padding: 2px 6px;
+            border: 2px solid black;
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            font-weight: bold;
+            margin-left: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-new {
+            background: var(--terminal-blue);
+            color: white;
+        }
+
+        .badge-top {
+            background: var(--hot-pink);
+            color: white;
+        }
+
+        .property-link {
+            color: #0000EE;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .property-link:visited {
+            color: #551A8B;
+        }
+
+        .property-link:hover {
+            background: yellow;
+            color: black;
+        }
+
+        .meta-text {
+            font-size: 11px;
+            color: #666;
+            font-family: 'Space Mono', monospace;
+        }
 
         .commute-text {
-            font-size: 13px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: bold;
         }
-        .commute-excellent { color: var(--success-text); }
-        .commute-good { color: var(--warning-text); }
-        .commute-fair { color: var(--danger-text); }
-        .commute-unknown { color: var(--text-muted); }
 
-        /* --- Mobile Responsive (Cards) --- */
+        .commute-excellent { color: #008000; }
+        .commute-good { color: #FF8C00; }
+        .commute-fair { color: #DC143C; }
+        .commute-unknown { color: #666; }
+
+        /* FOOTER - SHAMELESS CTA */
+        .footer-chaos {
+            background: var(--terminal-black);
+            color: var(--terminal-green);
+            padding: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            border: 3px solid var(--terminal-green);
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .footer-chaos a {
+            color: var(--hot-pink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hot-pink);
+        }
+
+        .footer-chaos a:hover {
+            background: var(--hot-pink);
+            color: white;
+        }
+
+        /* EASTER EGG - KONAMI CODE ACTIVATED */
+        .konami-activated {
+            animation: rainbow 2s infinite;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* MOBILE - STACK BRUTALLY */
         @media (max-width: 860px) {
-            body { padding: 12px; }
-            .header h1 { font-size: 24px; }
+            body { padding: 10px; }
 
-            .table-container {
-                border: none;
-                background: transparent;
-                box-shadow: none;
+            .filter-grid {
+                grid-template-columns: 1fr;
             }
 
             table, thead, tbody, th, td, tr {
                 display: block;
-                width: 100%;
             }
 
-            thead { display: none; }
+            thead {
+                display: none;
+            }
 
             tr {
-                background: var(--surface-color);
-                border: 1px solid var(--border-color);
-                border-radius: 12px;
-                margin-bottom: 16px;
-                padding: 16px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+                border: 3px solid black;
+                margin-bottom: 12px;
+                padding: 12px;
+                background: white;
             }
 
             tr.top-pick {
-                border-left: 1px solid var(--border-color);
-                border-top: 4px solid var(--warning-text);
+                border-top: 6px solid var(--hot-pink);
             }
 
             td {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
                 padding: 8px 0;
-                border-bottom: 1px solid var(--neutral-bg);
-                text-align: right;
+                border-right: none;
+                border-bottom: 1px solid var(--brutalist-grey);
             }
 
-            td:last-child { border-bottom: none; padding-bottom: 0; }
-            td:first-child { padding-top: 0; }
+            td:last-child {
+                border-bottom: none;
+            }
 
             td::before {
                 content: attr(data-label);
-                font-size: 12px;
-                font-weight: 600;
-                color: var(--text-muted);
+                font-family: 'Space Mono', monospace;
+                font-weight: bold;
+                font-size: 10px;
                 text-transform: uppercase;
-                letter-spacing: 0.05em;
-                text-align: left;
             }
-
-            /* Special layout for image & main details on mobile */
-            td.img-cell {
-                display: block;
-                border-bottom: none;
-                margin-bottom: 12px;
-                padding: 0;
-            }
-            td.img-cell::before { display: none; }
-
-            .property-img {
-                width: 100%;
-                height: 180px;
-                border-radius: 8px;
-            }
-
-            td.address-cell {
-                flex-direction: column;
-                align-items: flex-start;
-                text-align: left;
-                gap: 4px;
-            }
-            td.address-cell::before { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header & Stats -->
-        <div class="header">
-            <h1>🏠 Flat Hunt Dashboard</h1>
-            <div class="stats-grid">
-                <div class="stat-card"><span>📅 Updated:</span> <strong>26 Feb 2026</strong></div>
-                <div class="stat-card"><span>📊 Properties:</span> <strong id="total-count">0</strong></div>
-                <div class="stat-card"><span>💷 Range:</span> <strong>£2,000-3,000/mo</strong></div>
-                <div class="stat-card"><span>🔍 Scraper:</span> <strong>Rightmove + Zoopla</strong></div>
+    <!-- TERMINAL HEADER -->
+    <div class="terminal-header">
+        <div class="terminal-prompt">flathunt.exe --mode=desperate --budget=low --location=north-london</div>
+        <pre class="ascii-title">███████╗██╗      █████╗ ████████╗██╗  ██╗██╗   ██╗███╗   ██╗████████╗
+██╔════╝██║     ██╔══██╗╚══██╔══╝██║  ██║██║   ██║████╗  ██║╚══██╔══╝
+█████╗  ██║     ███████║   ██║   ███████║██║   ██║██╔██╗ ██║   ██║
+██╔══╝  ██║     ██╔══██║   ██║   ██╔══██║██║   ██║██║╚██╗██║   ██║
+██║     ███████╗██║  ██║   ██║   ██║  ██║╚██████╔╝██║ ╚████║   ██║
+╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝</pre>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-label">LAST_SCAN:</span>
+                <span class="stat-value">26.02.2026</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">PROPERTIES_FOUND:</span>
+                <span class="stat-value" id="total-count">13</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">BUDGET_RANGE:</span>
+                <span class="stat-value">£2k-3k/mo</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">PLATFORMS:</span>
+                <span class="stat-value">Rightmove + Zoopla</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">STATUS:</span>
+                <span class="stat-value" style="color: var(--hot-pink);">ACTIVELY DESPERATE</span>
             </div>
         </div>
+    </div>
 
-        <!-- Filters -->
-        <div class="filters">
-            <div class="filter-group">
-                <label>Bedrooms</label>
-                <select id="filter-beds">
-                    <option value="">All</option>
-                    <option value="0">Studio</option>
-                    <option value="1">1 bed</option>
-                    <option value="2">2 bed</option>
-                </select>
+    <!-- FILTERS WINDOW -->
+    <div class="window">
+        <div class="window-title-bar">
+            <div class="window-title">
+                <span>⚙</span>
+                <span>FILTERS.SYS - Search Parameters</span>
             </div>
-
-            <div class="filter-group">
-                <label>Max Price</label>
-                <select id="filter-price">
-                    <option value="">All</option>
-                    <option value="2000">£2,000</option>
-                    <option value="2200">£2,200</option>
-                    <option value="2400">£2,400</option>
-                    <option value="2600">£2,600</option>
-                    <option value="2800">£2,800</option>
-                </select>
+            <div class="window-controls">
+                <div class="window-btn">_</div>
+                <div class="window-btn">□</div>
+                <div class="window-btn" onclick="alert('Nice try. No escape from flat hunting.')">×</div>
             </div>
-
-            <div class="filter-group">
-                <label>Area</label>
-                <select id="filter-postcode">
-                    <option value="">All Regions</option>
-                    <option value="N1">N1 (Islington)</option>
-                    <option value="N4-N8">N4-N8 (North)</option>
-                    <option value="E8">E8 (Hackney)</option>
-                    <option value="NW">NW (North West)</option>
-                    <option value="E">E (East)</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Min Score</label>
-                <select id="filter-score">
-                    <option value="">All Scores</option>
-                    <option value="80">80+ (Excellent)</option>
-                    <option value="70">70+ (Good)</option>
-                    <option value="60">60+ (Fair)</option>
-                    <option value="scored">Scored Only</option>
-                </select>
-            </div>
-
-            <button class="reset-btn" onclick="resetFilters()">Reset</button>
         </div>
+        <div class="window-content">
+            <div class="filter-panel">
+                <div class="filter-title">SEARCH CONSTRAINTS</div>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>BEDS.cfg</label>
+                        <select id="filter-beds">
+                            <option value="">ALL_SIZES</option>
+                            <option value="0">STUDIO</option>
+                            <option value="1">1_BED</option>
+                            <option value="2">2_BED</option>
+                        </select>
+                    </div>
 
-        <!-- Data Table -->
-        <div class="table-container">
-            <table id="properties-table">
-                <thead>
-                    <tr>
-                        <th class="sortable" data-sort="score">Match</th>
-                        <th class="sortable" data-sort="address">Property Details</th>
-                        <th class="sortable" data-sort="price">Price/mo</th>
-                        <th class="sortable" data-sort="beds">Beds</th>
-                        <th class="sortable" data-sort="hugo">🚲 Hugo (Gym)</th>
-                        <th class="sortable" data-sort="holly">🚆 Holly (Work)</th>
-                        <th>Platform</th>
-                    </tr>
-                </thead>
-                <tbody id="properties-body">
-                    <!-- Data inserted by JavaScript -->
-                </tbody>
-            </table>
+                    <div class="filter-group">
+                        <label>MAX_PRICE.sys</label>
+                        <select id="filter-price">
+                            <option value="">NO_LIMIT</option>
+                            <option value="2000">£2,000</option>
+                            <option value="2200">£2,200</option>
+                            <option value="2400">£2,400</option>
+                            <option value="2600">£2,600</option>
+                            <option value="2800">£2,800</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>POSTCODE.db</label>
+                        <select id="filter-postcode">
+                            <option value="">ALL_ZONES</option>
+                            <option value="N1">N1_ISLINGTON</option>
+                            <option value="N4-N8">N4-N8_NORTH</option>
+                            <option value="E8">E8_HACKNEY</option>
+                            <option value="NW">NW_NORTHWEST</option>
+                            <option value="E">E_EAST</option>
+                            <option value="Other">OTHER_ZONES</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>MIN_SCORE.exe</label>
+                        <select id="filter-score">
+                            <option value="">SHOW_ALL</option>
+                            <option value="80">80+_EXCELLENT</option>
+                            <option value="70">70+_GOOD</option>
+                            <option value="60">60+_FAIR</option>
+                            <option value="scored">SCORED_ONLY</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-brutalist" onclick="resetFilters()">⟲ RESET ALL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTS WINDOW -->
+    <div class="window">
+        <div class="window-title-bar">
+            <div class="window-title">
+                <span>📁</span>
+                <span>PROPERTIES.DAT - Match Results</span>
+            </div>
+            <div class="window-controls">
+                <div class="window-btn">_</div>
+                <div class="window-btn">□</div>
+                <div class="window-btn" onclick="alert('YOU CANNOT ESCAPE THE PROPERTY MARKET')">×</div>
+            </div>
+        </div>
+        <div class="window-content" style="padding: 0;">
+            <div class="file-browser">
+                <div class="file-browser-header">
+                    📂 /home/hugo/desperate-flat-hunt/ | Sorted by: MATCH_SCORE (desc)
+                </div>
+                <table id="properties-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="score">MATCH</th>
+                            <th class="sortable" data-sort="address">PROPERTY.FILE</th>
+                            <th class="sortable" data-sort="price">PRICE/MO</th>
+                            <th class="sortable" data-sort="beds">BEDS</th>
+                            <th class="sortable" data-sort="hugo">🚲 HUGO→GYM</th>
+                            <th class="sortable" data-sort="holly">🚆 HOLLY→WORK</th>
+                            <th>SOURCE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="properties-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER - SHAMELESS TRANSPARENCY -->
+    <div class="footer-chaos">
+        <div style="border-bottom: 1px solid var(--terminal-green); padding-bottom: 8px; margin-bottom: 8px; font-weight: bold;">
+            SHAMELESS CTA & FINE PRINT:
+        </div>
+        <div>
+            → Built by Hugo in a state of rental desperation (Dec 2026 escape deadline)<br>
+            → Not endorsed by estate agents, landlords, or anyone with a mortgage<br>
+            → Scoring algorithm: 50% commute science, 50% vibes<br>
+            → Short-term leases only (3-6 months) because we're leaving this country soon<br>
+            → Press ↑↑↓↓←→←→BA for a surprise (Konami code works)<br>
+            → <a href="https://github.com/inglishugo-nz/flathunt" target="_blank">View source on GitHub</a> | Built with Claude Code + Playwright + Desperation<br>
+            → If you found this useful, <a href="https://highimpactathletes.com" target="_blank">donate to our charity instead of paying rent</a>
         </div>
     </div>
 
     <script>
         const properties = [
-            // TOP 5 - FULLY SCORED
             {
                 score: 91, rank: 1, address: "Islington Park Street, N1", price: 2650, beds: 1, sqft: 645,
                 hugo: "10min cycle", hugoScore: 25, holly: "22min to Bank", hollyScore: 25,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531596", available: "Now", addedDate: "2026-02-26", area: "N1"
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531596",
+                available: "Now", addedDate: "2026-02-26", area: "N1"
             },
             {
                 score: 73, rank: 2, address: "Newington Green Road, N1", price: 2600, beds: 2, sqft: 558,
                 hugo: "15min cycle", hugoScore: 20, holly: "30min to Bank", hollyScore: 20,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531020", available: "Now", addedDate: "2026-02-26", area: "N1"
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531020",
+                available: "Now", addedDate: "2026-02-26", area: "N1"
             },
             {
                 score: 71, rank: 3, address: "Scarborough Road, N4", price: 2400, beds: 2,
                 hugo: "10min cycle", hugoScore: 25, holly: "45min to Bank", hollyScore: 10,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628444", available: "Mid-April 2026", addedDate: "2026-02-26", area: "N4-N8"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628444",
+                available: "Mid-April", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
                 score: 71, rank: 4, address: "Crayford Road, N7", price: 2600, beds: 2,
                 hugo: "10min cycle", hugoScore: 25, holly: "45min to Bank", hollyScore: 10,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628459", available: "Now", addedDate: "2026-02-26", area: "N4-N8"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628459",
+                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
                 score: 68, rank: 5, address: "Broadway Market, E8", price: 2300, beds: 2,
                 hugo: "14min cycle", hugoScore: 20, holly: "38min to Bank", hollyScore: 15,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172", available: "3 April 2026", addedDate: "2026-02-26", area: "E8"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "3 April", addedDate: "2026-02-26", area: "E8"
             },
             {
                 score: 66, rank: 6, address: "Crouch Hall Road, N8", price: 2000, beds: 2,
                 hugo: "12min cycle", hugoScore: 20, holly: "48min to Bank", hollyScore: 10,
-                platform: "Zoopla", url: "https://www.rightmove.co.uk/properties/172628408", available: "Now", addedDate: "2026-02-26", area: "N4-N8"
+                platform: "Zoopla", url: "https://www.rightmove.co.uk/properties/172628408",
+                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
             },
-
-            // REST - NOT YET SCORED
             {
                 score: null, address: "Highbury Stadium Mews, N5", price: 2650, beds: 2,
                 hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72530779", available: "Now", addedDate: "2026-02-26", area: "N4-N8"
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72530779",
+                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
                 score: 59, address: "Finchley Road, NW2", price: 2000, beds: 1, sqft: 600,
                 hugo: "20min cycle", hugoScore: 15, holly: "52min to Bank", hollyScore: 5,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172629356", available: "Now", addedDate: "2026-02-26", area: "NW"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172629356",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
                 score: null, address: "The Fountains, N3", price: 2250, beds: 2,
                 hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627685", available: "Now", addedDate: "2026-02-26", area: "NW"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627685",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
                 score: null, address: "Corringham Road, NW11", price: 2250, beds: 2,
                 hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531452", available: "Now", addedDate: "2026-02-26", area: "NW"
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531452",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
                 score: null, address: "Camden, NW1", price: 2960, beds: 0,
                 hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk", available: "Now", addedDate: "2026-02-26", area: "NW"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
                 score: null, address: "Whitechapel, E1", price: 2350, beds: 1,
                 hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk", available: "Now", addedDate: "2026-02-26", area: "E"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk",
+                available: "Now", addedDate: "2026-02-26", area: "E"
             },
             {
                 score: null, address: "Riverlight Quay, SW11", price: 2750, beds: 1,
                 hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk", available: "Now", addedDate: "2026-02-26", area: "Other"
+                platform: "Rightmove", url: "https://www.rightmove.co.uk",
+                available: "Now", addedDate: "2026-02-26", area: "Other"
             }
         ];
 
         let currentSort = { column: 'score', direction: 'desc' };
 
-        // Helper classes for UI styling
+        // EASTER EGG: Konami Code
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                document.body.classList.add('konami-activated');
+                alert('🎮 KONAMI CODE ACTIVATED! Rainbow mode engaged. The landlords fear you now.');
+            }
+        });
+
         function getScoreClass(score) {
             if (score === null) return 'score-unknown';
             if (score >= 80) return 'score-excellent';
@@ -558,52 +741,49 @@
             const tbody = document.getElementById('properties-body');
             tbody.innerHTML = '';
 
-            filteredProperties.forEach((prop, index) => {
+            filteredProperties.forEach(prop => {
                 const isTopPick = prop.rank && prop.rank <= 5;
                 const row = document.createElement('tr');
                 if (isTopPick) row.classList.add('top-pick');
 
-                // Generate HTML for badges
-                const newBadge = prop.addedDate === '2026-02-26' ? `<span class="badge badge-new">NEW</span>` : '';
-                const rankBadge = isTopPick ? `<span class="badge badge-top">⭐ TOP ${prop.rank}</span>` : '';
-                const starHugo = prop.hugoScore >= 25 ? ' ⭐' : '';
-                const starHolly = prop.hollyScore >= 25 ? ' ⭐' : '';
+                const newBadge = prop.addedDate === '2026-02-26' ? '<span class="badge-brutal badge-new">NEW</span>' : '';
+                const rankBadge = isTopPick ? `<span class="badge-brutal badge-top">★ TOP ${prop.rank}</span>` : '';
+                const starHugo = prop.hugoScore >= 25 ? ' ★' : '';
+                const starHolly = prop.hollyScore >= 25 ? ' ★' : '';
 
                 row.innerHTML = `
-                    <td data-label="Match Score">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="score-pill ${getScoreClass(prop.score)}">
-                                ${prop.score !== null ? prop.score : 'TBC'}
-                            </span>
-                        </div>
+                    <td data-label="MATCH">
+                        <span class="score-box ${getScoreClass(prop.score)}">
+                            ${prop.score !== null ? prop.score : 'TBC'}
+                        </span>
                     </td>
-                    <td class="address-cell" data-label="Property">
-                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-                            ${rankBadge} ${newBadge}
-                        </div>
-                        <a href="${prop.url}" target="_blank" class="address-link">${prop.address}</a>
-                        <div class="sub-text">
-                            ${prop.sqft ? `${prop.sqft} sq ft • ` : ''} Avail: ${prop.available}
-                        </div>
+                    <td data-label="PROPERTY">
+                        ${rankBadge}${newBadge}
+                        <br>
+                        <a href="${prop.url}" target="_blank" class="property-link">${prop.address}</a>
+                        <br>
+                        <span class="meta-text">
+                            ${prop.sqft ? prop.sqft + ' sqft | ' : ''}${prop.available}
+                        </span>
                     </td>
-                    <td data-label="Price/mo">
-                        <span class="price-text">£${prop.price.toLocaleString()}</span>
+                    <td data-label="PRICE">
+                        <strong>£${prop.price.toLocaleString()}</strong>
                     </td>
-                    <td data-label="Beds">
-                        ${prop.beds === 0 ? 'Studio' : prop.beds + ' bed'}
+                    <td data-label="BEDS">
+                        ${prop.beds === 0 ? 'STUDIO' : prop.beds + 'BR'}
                     </td>
-                    <td data-label="Hugo">
+                    <td data-label="HUGO">
                         <span class="commute-text ${getCommuteClass(prop.hugoScore)}">
                             ${prop.hugo}${starHugo}
                         </span>
                     </td>
-                    <td data-label="Holly">
+                    <td data-label="HOLLY">
                         <span class="commute-text ${getCommuteClass(prop.hollyScore)}">
                             ${prop.holly}${starHolly}
                         </span>
                     </td>
-                    <td data-label="Platform">
-                        <span class="sub-text">${prop.platform}</span>
+                    <td data-label="SOURCE">
+                        <span class="meta-text">${prop.platform}</span>
                     </td>
                 `;
                 tbody.appendChild(row);
@@ -624,7 +804,6 @@
                 let valA = a[column];
                 let valB = b[column];
 
-                // Handle null scores gracefully (keep TBCs at bottom when sorting down)
                 if (column === 'score') {
                     if (valA === null && valB === null) return 0;
                     if (valA === null) return currentSort.direction === 'desc' ? 1 : -1;
@@ -636,11 +815,9 @@
                     valB = valB.toLowerCase();
                 }
 
-                if (currentSort.direction === 'asc') {
-                    return valA > valB ? 1 : -1;
-                } else {
-                    return valA < valB ? 1 : -1;
-                }
+                return currentSort.direction === 'asc'
+                    ? (valA > valB ? 1 : -1)
+                    : (valA < valB ? 1 : -1);
             });
 
             updateSortIndicators();
@@ -682,16 +859,14 @@
             applyFilters();
         }
 
-        // Event Listeners
         document.querySelectorAll('th.sortable').forEach(th => {
             th.addEventListener('click', () => sortProperties(th.dataset.sort));
         });
 
-        document.querySelectorAll('.filters select').forEach(select => {
+        document.querySelectorAll('.filter-panel select').forEach(select => {
             select.addEventListener('change', applyFilters);
         });
 
-        // Initialize (sort by score descending by default)
         sortProperties('score');
     </script>
 </body>
