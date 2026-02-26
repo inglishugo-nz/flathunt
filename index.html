@@ -467,15 +467,15 @@
     </div>
 
     <script>
-        // Placeholder images used to simulate the Firecrawl screenshot scrape requirement
+        // Placeholder images - using reliable placeholder service
         const placeholders = [
-            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0963?auto=format&fit=crop&w=300&q=80",
-            "https://images.unsplash.com/photo-1502672260266-1c1de2424282?auto=format&fit=crop&w=300&q=80",
-            "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=300&q=80",
-            "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=300&q=80"
+            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+1",
+            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+2",
+            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+3",
+            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+4"
         ];
 
-        // Randomize mock images for demo
+        // Cycle through placeholder images
         const getMockImage = (index) => placeholders[index % placeholders.length];
 
         const properties = [
