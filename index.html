@@ -449,7 +449,6 @@
             <table id="properties-table">
                 <thead>
                     <tr>
-                        <th class="img-cell">Image</th>
                         <th class="sortable" data-sort="score">Match</th>
                         <th class="sortable" data-sort="address">Property Details</th>
                         <th class="sortable" data-sort="price">Price/mo</th>
@@ -467,17 +466,6 @@
     </div>
 
     <script>
-        // Placeholder images - using reliable placeholder service
-        const placeholders = [
-            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+1",
-            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+2",
-            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+3",
-            "https://via.placeholder.com/300x225/E5E7EB/6B7280?text=Property+4"
-        ];
-
-        // Cycle through placeholder images
-        const getMockImage = (index) => placeholders[index % placeholders.length];
-
         const properties = [
             // TOP 5 - FULLY SCORED
             {
@@ -581,13 +569,7 @@
                 const starHugo = prop.hugoScore >= 25 ? ' ⭐' : '';
                 const starHolly = prop.hollyScore >= 25 ? ' ⭐' : '';
 
-                // Add simulated Firecrawl image
-                const imgUrl = getMockImage(index);
-
                 row.innerHTML = `
-                    <td class="img-cell" data-label="Photos">
-                        <img src="${imgUrl}" alt="Property" class="property-img" loading="lazy">
-                    </td>
                     <td data-label="Match Score">
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span class="score-pill ${getScoreClass(prop.score)}">
