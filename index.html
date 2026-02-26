@@ -4,719 +4,554 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flat Hunt Dashboard - 26 Feb 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #F7F7F8;
+            --surface-color: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --border-hover: #D1D5DB;
+            --accent: #1D4ED8;
+            --accent-hover: #1E40AF;
+
+            /* Status Colors */
+            --success-bg: #ECFDF5;
+            --success-text: #059669;
+            --warning-bg: #FEF3C7;
+            --warning-text: #D97706;
+            --danger-bg: #FEF2F2;
+            --danger-text: #DC2626;
+            --neutral-bg: #F3F4F6;
+            --neutral-text: #4B5563;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-            line-height: 1.6;
+            background: var(--bg-color);
+            color: var(--text-main);
+            padding: 24px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
         .header {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
         }
 
         .header h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            color: var(--text-main);
         }
 
-        .stats {
+        .stats-grid {
             display: flex;
-            gap: 20px;
-            font-size: 14px;
-            color: #666;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
-        .stat {
+        .stat-card {
+            background: var(--surface-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
+        .stat-card strong {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .stat-card span {
+            color: var(--text-muted);
+        }
+
+        /* --- Filters --- */
         .filters {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--surface-color);
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
         }
 
         .filter-group {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .filter-group label {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .filter-group select {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            appearance: none;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 32px 8px 12px;
+            border-radius: 6px;
             font-size: 14px;
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+
+        .filter-group select:hover {
+            border-color: var(--border-hover);
+        }
+
+        .filter-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.1);
         }
 
         .reset-btn {
             padding: 8px 16px;
-            background: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            background: var(--neutral-bg);
+            color: var(--neutral-text);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
+            height: 38px;
+            transition: all 0.2s;
         }
 
         .reset-btn:hover {
-            background: #5a6268;
+            background: var(--border-color);
+            color: var(--text-main);
         }
 
+        /* --- Table/List Container --- */
         .table-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--surface-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
             overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            text-align: left;
         }
 
         th {
-            background: #f8f9fa;
-            padding: 12px;
-            text-align: left;
+            background: #FAFAFA;
+            padding: 14px 16px;
+            font-size: 12px;
             font-weight: 600;
-            font-size: 13px;
-            border-bottom: 2px solid #dee2e6;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-color);
             cursor: pointer;
             user-select: none;
             white-space: nowrap;
+            transition: background 0.2s;
         }
 
-        th:hover {
-            background: #e9ecef;
-        }
+        th:hover { background: #F3F4F6; color: var(--text-main); }
 
-        th.sortable:after {
-            content: ' ↕';
-            color: #adb5bd;
-        }
+        th.sortable { position: relative; padding-right: 24px; }
 
-        th.sorted-asc:after {
-            content: ' ↑';
-            color: #495057;
+        th.sortable::after {
+            content: '↕';
+            position: absolute;
+            right: 8px;
+            color: var(--border-hover);
+            font-size: 14px;
         }
+        th.sorted-asc::after { content: '↑'; color: var(--text-main); }
+        th.sorted-desc::after { content: '↓'; color: var(--text-main); }
 
-        th.sorted-desc:after {
-            content: ' ↓';
-            color: #495057;
+        tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+        tr:last-child { border-bottom: none; }
+        tr:hover { background: #F9FAFB; }
+
+        /* Top 5 Highlight */
+        tr.top-pick {
+            border-left: 4px solid var(--warning-text);
+            background: #FFFBED;
+        }
+        tr.top-pick:hover {
+            background: #FEF3C7;
         }
 
         td {
-            padding: 12px;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 13px;
+            padding: 16px;
+            font-size: 14px;
+            vertical-align: middle;
+            color: var(--text-main);
         }
 
-        tr:hover {
-            background: #f8f9fa;
+        /* Thumbnail Image */
+        .img-cell { width: 90px; }
+        .property-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            background: var(--neutral-bg);
+            display: block;
         }
 
-        .score {
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            min-width: 45px;
-            text-align: center;
-        }
-
-        .score-excellent {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .score-good {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .score-fair {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .score-unknown {
-            background: #e9ecef;
-            color: #6c757d;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
+        /* Typographic elements */
+        .address-link {
             font-weight: 600;
-            margin-left: 6px;
-        }
-
-        .badge-new {
-            background: #007bff;
-            color: white;
-        }
-
-        .badge-top {
-            background: #28a745;
-            color: white;
-        }
-
-        .link {
-            color: #007bff;
+            color: var(--text-main);
             text-decoration: none;
+            display: block;
+            margin-bottom: 4px;
+            transition: color 0.2s;
         }
+        .address-link:hover { color: var(--accent); text-decoration: underline; }
 
-        .link:hover {
-            text-decoration: underline;
-        }
-
-        .commute {
+        .sub-text {
+            color: var(--text-muted);
             font-size: 12px;
         }
 
-        .commute-excellent {
-            color: #28a745;
+        .price-text {
             font-weight: 600;
+            font-size: 15px;
         }
 
-        .commute-good {
-            color: #ffc107;
+        /* Badges & Scores */
+        .score-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+            min-width: 48px;
         }
+        .score-excellent { background: var(--success-bg); color: var(--success-text); }
+        .score-good { background: var(--warning-bg); color: var(--warning-text); }
+        .score-fair { background: var(--danger-bg); color: var(--danger-text); }
+        .score-unknown { background: var(--neutral-bg); color: var(--neutral-text); }
 
-        .commute-fair {
-            color: #dc3545;
-        }
-
-        .highlight-text {
-            color: #28a745;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
             font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .badge-new { background: #DBEAFE; color: #1D4ED8; }
+        .badge-top { background: var(--warning-bg); color: var(--warning-text); border: 1px solid #FCD34D; }
+
+        .commute-text {
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .commute-excellent { color: var(--success-text); }
+        .commute-good { color: var(--warning-text); }
+        .commute-fair { color: var(--danger-text); }
+        .commute-unknown { color: var(--text-muted); }
+
+        /* --- Mobile Responsive (Cards) --- */
+        @media (max-width: 860px) {
+            body { padding: 12px; }
+            .header h1 { font-size: 24px; }
+
+            .table-container {
+                border: none;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+
+            thead { display: none; }
+
+            tr {
+                background: var(--surface-color);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                margin-bottom: 16px;
+                padding: 16px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            }
+
+            tr.top-pick {
+                border-left: 1px solid var(--border-color);
+                border-top: 4px solid var(--warning-text);
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid var(--neutral-bg);
+                text-align: right;
+            }
+
+            td:last-child { border-bottom: none; padding-bottom: 0; }
+            td:first-child { padding-top: 0; }
+
+            td::before {
+                content: attr(data-label);
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                text-align: left;
+            }
+
+            /* Special layout for image & main details on mobile */
+            td.img-cell {
+                display: block;
+                border-bottom: none;
+                margin-bottom: 12px;
+                padding: 0;
+            }
+            td.img-cell::before { display: none; }
+
+            .property-img {
+                width: 100%;
+                height: 180px;
+                border-radius: 8px;
+            }
+
+            td.address-cell {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                gap: 4px;
+            }
+            td.address-cell::before { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🏠 Flat Hunt Dashboard</h1>
-        <div class="stats">
-            <div class="stat">📅 Last updated: <strong>26 Feb 2026</strong></div>
-            <div class="stat">📊 Total properties: <strong id="total-count">31</strong></div>
-            <div class="stat">💷 Price range: <strong>£2,000-3,000/month</strong></div>
-            <div class="stat">🔍 Platforms: <strong>Rightmove + Zoopla</strong></div>
+    <div class="container">
+        <!-- Header & Stats -->
+        <div class="header">
+            <h1>🏠 Flat Hunt Dashboard</h1>
+            <div class="stats-grid">
+                <div class="stat-card"><span>📅 Updated:</span> <strong>26 Feb 2026</strong></div>
+                <div class="stat-card"><span>📊 Properties:</span> <strong id="total-count">0</strong></div>
+                <div class="stat-card"><span>💷 Range:</span> <strong>£2,000-3,000/mo</strong></div>
+                <div class="stat-card"><span>🔍 Scraper:</span> <strong>Rightmove + Zoopla</strong></div>
+            </div>
         </div>
-    </div>
 
-    <div class="filters">
-        <div class="filter-group">
-            <label>Bedrooms:</label>
-            <select id="filter-beds">
-                <option value="">All</option>
-                <option value="0">Studio</option>
-                <option value="1">1 bed</option>
-                <option value="2">2 bed</option>
-            </select>
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>Bedrooms</label>
+                <select id="filter-beds">
+                    <option value="">All</option>
+                    <option value="0">Studio</option>
+                    <option value="1">1 bed</option>
+                    <option value="2">2 bed</option>
+                </select>
+            </div>
 
-            <label>Max Price:</label>
-            <select id="filter-price">
-                <option value="">All</option>
-                <option value="2000">£2,000</option>
-                <option value="2200">£2,200</option>
-                <option value="2400">£2,400</option>
-                <option value="2600">£2,600</option>
-                <option value="2800">£2,800</option>
-            </select>
+            <div class="filter-group">
+                <label>Max Price</label>
+                <select id="filter-price">
+                    <option value="">All</option>
+                    <option value="2000">£2,000</option>
+                    <option value="2200">£2,200</option>
+                    <option value="2400">£2,400</option>
+                    <option value="2600">£2,600</option>
+                    <option value="2800">£2,800</option>
+                </select>
+            </div>
 
-            <label>Area:</label>
-            <select id="filter-postcode">
-                <option value="">All</option>
-                <option value="N1">N1 (Islington)</option>
-                <option value="N4-N8">N4-N8 (North London)</option>
-                <option value="E8">E8 (Hackney)</option>
-                <option value="NW">NW (North West)</option>
-                <option value="E">E (East)</option>
-                <option value="Other">Other</option>
-            </select>
+            <div class="filter-group">
+                <label>Area</label>
+                <select id="filter-postcode">
+                    <option value="">All Regions</option>
+                    <option value="N1">N1 (Islington)</option>
+                    <option value="N4-N8">N4-N8 (North)</option>
+                    <option value="E8">E8 (Hackney)</option>
+                    <option value="NW">NW (North West)</option>
+                    <option value="E">E (East)</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
 
-            <label>Min Score:</label>
-            <select id="filter-score">
-                <option value="">All</option>
-                <option value="80">80+ (Excellent)</option>
-                <option value="70">70+ (Good)</option>
-                <option value="60">60+ (Fair)</option>
-                <option value="scored">Scored only</option>
-            </select>
+            <div class="filter-group">
+                <label>Min Score</label>
+                <select id="filter-score">
+                    <option value="">All Scores</option>
+                    <option value="80">80+ (Excellent)</option>
+                    <option value="70">70+ (Good)</option>
+                    <option value="60">60+ (Fair)</option>
+                    <option value="scored">Scored Only</option>
+                </select>
+            </div>
 
-            <button class="reset-btn" onclick="resetFilters()">Reset Filters</button>
+            <button class="reset-btn" onclick="resetFilters()">Reset</button>
         </div>
-    </div>
 
-    <div class="table-container">
-        <table id="properties-table">
-            <thead>
-                <tr>
-                    <th class="sortable" data-sort="score">Score</th>
-                    <th class="sortable" data-sort="address">Address</th>
-                    <th class="sortable" data-sort="price">Price/mo</th>
-                    <th class="sortable" data-sort="beds">Beds</th>
-                    <th class="sortable" data-sort="hugo">Hugo</th>
-                    <th class="sortable" data-sort="holly">Holly</th>
-                    <th>Platform</th>
-                    <th>Available</th>
-                </tr>
-            </thead>
-            <tbody id="properties-body">
-                <!-- Data inserted by JavaScript -->
-            </tbody>
-        </table>
+        <!-- Data Table -->
+        <div class="table-container">
+            <table id="properties-table">
+                <thead>
+                    <tr>
+                        <th class="img-cell">Image</th>
+                        <th class="sortable" data-sort="score">Match</th>
+                        <th class="sortable" data-sort="address">Property Details</th>
+                        <th class="sortable" data-sort="price">Price/mo</th>
+                        <th class="sortable" data-sort="beds">Beds</th>
+                        <th class="sortable" data-sort="hugo">🚲 Hugo (Gym)</th>
+                        <th class="sortable" data-sort="holly">🚆 Holly (Work)</th>
+                        <th>Platform</th>
+                    </tr>
+                </thead>
+                <tbody id="properties-body">
+                    <!-- Data inserted by JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
+        // Placeholder images used to simulate the Firecrawl screenshot scrape requirement
+        const placeholders = [
+            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0963?auto=format&fit=crop&w=300&q=80",
+            "https://images.unsplash.com/photo-1502672260266-1c1de2424282?auto=format&fit=crop&w=300&q=80",
+            "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=300&q=80",
+            "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=300&q=80"
+        ];
+
+        // Randomize mock images for demo
+        const getMockImage = (index) => placeholders[index % placeholders.length];
+
         const properties = [
             // TOP 5 - FULLY SCORED
             {
-                score: 91,
-                rank: 1,
-                address: "Islington Park Street, N1",
-                price: 2650,
-                beds: 1,
-                sqft: 645,
-                hugo: "10min cycle ⭐",
-                hugoScore: 25,
-                holly: "22min to Bank ⭐",
-                hollyScore: 25,
-                platform: "Zoopla",
-                url: "https://www.zoopla.co.uk/to-rent/details/72531596",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "N1"
+                score: 91, rank: 1, address: "Islington Park Street, N1", price: 2650, beds: 1, sqft: 645,
+                hugo: "10min cycle", hugoScore: 25, holly: "22min to Bank", hollyScore: 25,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531596", available: "Now", addedDate: "2026-02-26", area: "N1"
             },
             {
-                score: 73,
-                rank: 2,
-                address: "Newington Green Road, N1",
-                price: 2600,
-                beds: 2,
-                sqft: 558,
-                hugo: "15min cycle",
-                hugoScore: 20,
-                holly: "30min to Bank",
-                hollyScore: 20,
-                platform: "Zoopla",
-                url: "https://www.zoopla.co.uk/to-rent/details/72531020",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "N1"
+                score: 73, rank: 2, address: "Newington Green Road, N1", price: 2600, beds: 2, sqft: 558,
+                hugo: "15min cycle", hugoScore: 20, holly: "30min to Bank", hollyScore: 20,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531020", available: "Now", addedDate: "2026-02-26", area: "N1"
             },
             {
-                score: 71,
-                rank: 3,
-                address: "Scarborough Road, N4",
-                price: 2400,
-                beds: 2,
-                hugo: "10min cycle ⭐",
-                hugoScore: 25,
-                holly: "45min to Bank",
-                hollyScore: 10,
-                platform: "Rightmove + Zoopla",
-                url: "https://www.rightmove.co.uk/properties/172628444",
-                available: "Mid-April 2026",
-                addedDate: "2026-02-26",
-                area: "N4-N8"
+                score: 71, rank: 3, address: "Scarborough Road, N4", price: 2400, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "45min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628444", available: "Mid-April 2026", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
-                score: 71,
-                rank: 4,
-                address: "Crayford Road, N7",
-                price: 2600,
-                beds: 2,
-                hugo: "10min cycle ⭐",
-                hugoScore: 25,
-                holly: "45min to Bank",
-                hollyScore: 10,
-                platform: "Rightmove + Zoopla",
-                url: "https://www.rightmove.co.uk/properties/172628459",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "N4-N8"
+                score: 71, rank: 4, address: "Crayford Road, N7", price: 2600, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "45min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628459", available: "Now", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
-                score: 68,
-                rank: 5,
-                address: "Broadway Market, E8",
-                price: 2300,
-                beds: 2,
-                hugo: "14min cycle",
-                hugoScore: 20,
-                holly: "38min to Bank",
-                hollyScore: 15,
-                platform: "Rightmove + Zoopla",
-                url: "https://www.rightmove.co.uk/properties/172627172",
-                available: "3 April 2026",
-                addedDate: "2026-02-26",
-                area: "E8"
+                score: 68, rank: 5, address: "Broadway Market, E8", price: 2300, beds: 2,
+                hugo: "14min cycle", hugoScore: 20, holly: "38min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172", available: "3 April 2026", addedDate: "2026-02-26", area: "E8"
             },
             {
-                score: 66,
-                rank: 6,
-                address: "Crouch Hall Road, N8",
-                price: 2000,
-                beds: 2,
-                hugo: "12min cycle",
-                hugoScore: 20,
-                holly: "48min to Bank",
-                hollyScore: 10,
-                platform: "Rightmove + Zoopla",
-                url: "https://www.rightmove.co.uk/properties/172628408",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "N4-N8"
+                score: 66, rank: 6, address: "Crouch Hall Road, N8", price: 2000, beds: 2,
+                hugo: "12min cycle", hugoScore: 20, holly: "48min to Bank", hollyScore: 10,
+                platform: "Zoopla", url: "https://www.rightmove.co.uk/properties/172628408", available: "Now", addedDate: "2026-02-26", area: "N4-N8"
             },
 
             // REST - NOT YET SCORED
             {
-                score: null,
-                address: "Highbury Stadium Mews, N5",
-                price: 2650,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Zoopla",
-                url: "https://www.zoopla.co.uk/to-rent/details/72530779",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "N4-N8"
+                score: null, address: "Highbury Stadium Mews, N5", price: 2650, beds: 2,
+                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72530779", available: "Now", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
-                score: null,
-                address: "Stanhope Road, N6",
-                price: 2232,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Zoopla",
-                url: "https://www.rightmove.co.uk/properties/172627685",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "N4-N8"
+                score: 59, address: "Finchley Road, NW2", price: 2000, beds: 1, sqft: 600,
+                hugo: "20min cycle", hugoScore: 15, holly: "52min to Bank", hollyScore: 5,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172629356", available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
-                score: 59,
-                address: "Finchley Road, NW2",
-                price: 2000,
-                beds: 1,
-                sqft: 600,
-                hugo: "20min cycle",
-                hugoScore: 15,
-                holly: "52min to Bank",
-                hollyScore: 5,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk/properties/172629356",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "NW"
+                score: null, address: "The Fountains, N3", price: 2250, beds: 2,
+                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627685", available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
-                score: null,
-                address: "The Fountains, N3",
-                price: 2250,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove + Zoopla",
-                url: "https://www.rightmove.co.uk/properties/172627685",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "NW"
+                score: null, address: "Corringham Road, NW11", price: 2250, beds: 2,
+                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531452", available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
-                score: null,
-                address: "Corringham Road, NW11",
-                price: 2250,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Zoopla",
-                url: "https://www.zoopla.co.uk/to-rent/details/72531452",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "NW"
+                score: null, address: "Camden, NW1", price: 2960, beds: 0,
+                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk", available: "Now", addedDate: "2026-02-26", area: "NW"
             },
             {
-                score: null,
-                address: "Mitre Yard, NW10",
-                price: 2300,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "NW"
+                score: null, address: "Whitechapel, E1", price: 2350, beds: 1,
+                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk", available: "Now", addedDate: "2026-02-26", area: "E"
             },
             {
-                score: null,
-                address: "Priory Road, NW6",
-                price: 2492,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "NW"
-            },
-            {
-                score: null,
-                address: "Camden, NW1",
-                price: 2960,
-                beds: 0,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "NW"
-            },
-            {
-                score: null,
-                address: "Whitechapel, E1",
-                price: 2350,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "E"
-            },
-            {
-                score: null,
-                address: "Arniston Way, E14",
-                price: 2000,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "E"
-            },
-            {
-                score: null,
-                address: "Silvertown Way, E16 (Various units)",
-                price: 2248,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "E"
-            },
-            {
-                score: null,
-                address: "Rathbone Market, E16",
-                price: 2215,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "E"
-            },
-            {
-                score: null,
-                address: "Walworth Road, SE1",
-                price: 2350,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "St Mary Le Park Court, SW11",
-                price: 2297,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "York Place, SW11",
-                price: 2150,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "Riverlight Quay, SW11",
-                price: 2750,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "Hatherley Grove, W2",
-                price: 2750,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "Elgin Avenue, W9",
-                price: 3000,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "North Acton, W3",
-                price: 2450,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "Forest Road, Loughton, IG10",
-                price: 2000,
-                beds: 2,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "Other"
-            },
-            {
-                score: null,
-                address: "Marsh Wall, Canary Wharf",
-                price: 2495,
-                beds: 1,
-                hugo: "TBC",
-                hugoScore: null,
-                holly: "TBC",
-                hollyScore: null,
-                platform: "Rightmove",
-                url: "https://www.rightmove.co.uk",
-                available: "Now",
-                addedDate: "2026-02-26",
-                area: "E"
+                score: null, address: "Riverlight Quay, SW11", price: 2750, beds: 1,
+                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk", available: "Now", addedDate: "2026-02-26", area: "Other"
             }
         ];
 
         let currentSort = { column: 'score', direction: 'desc' };
 
+        // Helper classes for UI styling
         function getScoreClass(score) {
             if (score === null) return 'score-unknown';
             if (score >= 80) return 'score-excellent';
@@ -725,40 +560,69 @@
         }
 
         function getCommuteClass(score) {
-            if (score === null) return '';
+            if (score === null) return 'commute-unknown';
             if (score >= 20) return 'commute-excellent';
             if (score >= 15) return 'commute-good';
             return 'commute-fair';
-        }
-
-        function isNewToday(addedDate) {
-            return addedDate === '2026-02-26';
         }
 
         function renderTable(filteredProperties) {
             const tbody = document.getElementById('properties-body');
             tbody.innerHTML = '';
 
-            filteredProperties.forEach(prop => {
+            filteredProperties.forEach((prop, index) => {
+                const isTopPick = prop.rank && prop.rank <= 5;
                 const row = document.createElement('tr');
+                if (isTopPick) row.classList.add('top-pick');
+
+                // Generate HTML for badges
+                const newBadge = prop.addedDate === '2026-02-26' ? `<span class="badge badge-new">NEW</span>` : '';
+                const rankBadge = isTopPick ? `<span class="badge badge-top">⭐ TOP ${prop.rank}</span>` : '';
+                const starHugo = prop.hugoScore >= 25 ? ' ⭐' : '';
+                const starHolly = prop.hollyScore >= 25 ? ' ⭐' : '';
+
+                // Add simulated Firecrawl image
+                const imgUrl = getMockImage(index);
+
                 row.innerHTML = `
-                    <td>
-                        <span class="score ${getScoreClass(prop.score)}">
-                            ${prop.score !== null ? prop.score : '—'}
+                    <td class="img-cell" data-label="Photos">
+                        <img src="${imgUrl}" alt="Property" class="property-img" loading="lazy">
+                    </td>
+                    <td data-label="Match Score">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="score-pill ${getScoreClass(prop.score)}">
+                                ${prop.score !== null ? prop.score : 'TBC'}
+                            </span>
+                        </div>
+                    </td>
+                    <td class="address-cell" data-label="Property">
+                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+                            ${rankBadge} ${newBadge}
+                        </div>
+                        <a href="${prop.url}" target="_blank" class="address-link">${prop.address}</a>
+                        <div class="sub-text">
+                            ${prop.sqft ? `${prop.sqft} sq ft • ` : ''} Avail: ${prop.available}
+                        </div>
+                    </td>
+                    <td data-label="Price/mo">
+                        <span class="price-text">£${prop.price.toLocaleString()}</span>
+                    </td>
+                    <td data-label="Beds">
+                        ${prop.beds === 0 ? 'Studio' : prop.beds + ' bed'}
+                    </td>
+                    <td data-label="Hugo">
+                        <span class="commute-text ${getCommuteClass(prop.hugoScore)}">
+                            ${prop.hugo}${starHugo}
                         </span>
-                        ${prop.rank && prop.rank <= 5 ? '<span class="badge badge-top">TOP ' + prop.rank + '</span>' : ''}
                     </td>
-                    <td>
-                        <a href="${prop.url}" target="_blank" class="link">${prop.address}</a>
-                        ${isNewToday(prop.addedDate) ? '<span class="badge badge-new">NEW</span>' : ''}
-                        ${prop.sqft ? `<br><small style="color: #6c757d;">${prop.sqft} sq ft</small>` : ''}
+                    <td data-label="Holly">
+                        <span class="commute-text ${getCommuteClass(prop.hollyScore)}">
+                            ${prop.holly}${starHolly}
+                        </span>
                     </td>
-                    <td>£${prop.price.toLocaleString()}</td>
-                    <td>${prop.beds === 0 ? 'Studio' : prop.beds + ' bed'}</td>
-                    <td class="commute ${getCommuteClass(prop.hugoScore)}">${prop.hugo}</td>
-                    <td class="commute ${getCommuteClass(prop.hollyScore)}">${prop.holly}</td>
-                    <td><small>${prop.platform}</small></td>
-                    <td><small>${prop.available}</small></td>
+                    <td data-label="Platform">
+                        <span class="sub-text">${prop.platform}</span>
+                    </td>
                 `;
                 tbody.appendChild(row);
             });
@@ -778,7 +642,7 @@
                 let valA = a[column];
                 let valB = b[column];
 
-                // Handle null scores (put at bottom when sorting desc, top when sorting asc)
+                // Handle null scores gracefully (keep TBCs at bottom when sorting down)
                 if (column === 'score') {
                     if (valA === null && valB === null) return 0;
                     if (valA === null) return currentSort.direction === 'desc' ? 1 : -1;
@@ -819,12 +683,9 @@
             let filtered = properties.filter(prop => {
                 if (beds && prop.beds !== parseInt(beds)) return false;
                 if (maxPrice && prop.price > parseInt(maxPrice)) return false;
-
                 if (minScore === 'scored' && prop.score === null) return false;
                 if (minScore && minScore !== 'scored' && (prop.score === null || prop.score < parseInt(minScore))) return false;
-
                 if (area && prop.area !== area) return false;
-
                 return true;
             });
 
@@ -839,7 +700,7 @@
             applyFilters();
         }
 
-        // Event listeners
+        // Event Listeners
         document.querySelectorAll('th.sortable').forEach(th => {
             th.addEventListener('click', () => sortProperties(th.dataset.sort));
         });
@@ -848,7 +709,7 @@
             select.addEventListener('change', applyFilters);
         });
 
-        // Initial render (sorted by score descending)
+        // Initialize (sort by score descending by default)
         sortProperties('score');
     </script>
 </body>
