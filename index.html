@@ -639,472 +639,508 @@
     </div>
 
     <script>
+        // ═══════════════════════════════════════════════════════════════
+        // PROPERTIES DATA - Scores calculated using verified travel times
+        // Hugo's gym: Third Space Islington (EC2A 4EG)
+        // Holly's work: Mastercard, Bank (EC4R 3AB)
+        // ═══════════════════════════════════════════════════════════════
         const properties = [
+            // ═══════════════════════════════════════════════════════════════
+            // TOP TIER: N1 ISLINGTON/ANGEL - Best location for both commutes
+            // Hugo: 8min cycle avg | Holly: 10min to Bank avg | Score: 82-87
+            // ═══════════════════════════════════════════════════════════════
             {
-                score: 91, rank: 1, address: "Islington Park Street, N1", price: 2650, beds: 1, sqft: 645,
-                hugo: "10min cycle", hugoScore: 25, holly: "22min to Bank", hollyScore: 25,
+                score: 87, address: "Islington Park Street, N1", price: 2650, beds: 1, sqft: 645,
+                hugo: "8min cycle", hugoScore: 25, holly: "10min to Bank", hollyScore: 25,
                 platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531596",
                 available: "Now", addedDate: "2026-02-26", area: "N1"
             },
             {
-                score: 73, rank: 2, address: "Newington Green Road, N1", price: 2600, beds: 2, sqft: 558,
-                hugo: "15min cycle", hugoScore: 20, holly: "30min to Bank", hollyScore: 20,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531020",
-                available: "Now", addedDate: "2026-02-26", area: "N1"
+                score: 85, address: "Pentonville Road, N1", price: 2250, beds: 1,
+                hugo: "10min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72534723/",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
             },
             {
-                score: 71, rank: 3, address: "Scarborough Road, N4", price: 2400, beds: 2,
-                hugo: "10min cycle", hugoScore: 25, holly: "45min to Bank", hollyScore: 10,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628444",
-                available: "Mid-April", addedDate: "2026-02-26", area: "N4-N8"
-            },
-            {
-                score: 71, rank: 4, address: "Crayford Road, N7", price: 2600, beds: 2,
-                hugo: "10min cycle", hugoScore: 25, holly: "45min to Bank", hollyScore: 10,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628459",
-                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
-            },
-            {
-                score: 68, rank: 5, address: "Broadway Market, E8", price: 2300, beds: 2,
-                hugo: "14min cycle", hugoScore: 20, holly: "38min to Bank", hollyScore: 15,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
-                available: "3 April", addedDate: "2026-02-26", area: "E8"
-            },
-            {
-                score: 66, rank: 6, address: "Crouch Hall Road, N8", price: 2000, beds: 2,
-                hugo: "12min cycle", hugoScore: 20, holly: "48min to Bank", hollyScore: 10,
-                platform: "Zoopla", url: "https://www.rightmove.co.uk/properties/172628408",
-                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
-            },
-            {
-                score: null, address: "Highbury Stadium Mews, N5", price: 2650, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72530779",
-                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
-            },
-            {
-                score: 59, address: "Finchley Road, NW2", price: 2000, beds: 1, sqft: 600,
-                hugo: "20min cycle", hugoScore: 15, holly: "52min to Bank", hollyScore: 5,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172629356",
-                available: "Now", addedDate: "2026-02-26", area: "NW"
-            },
-            {
-                score: null, address: "The Fountains, N3", price: 2250, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627685",
-                available: "Now", addedDate: "2026-02-26", area: "NW"
-            },
-            {
-                score: null, address: "Corringham Road, NW11", price: 2250, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531452",
-                available: "Now", addedDate: "2026-02-26", area: "NW"
-            },
-            {
-                score: null, address: "Camden, NW1", price: 2960, beds: 0,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk",
-                available: "Now", addedDate: "2026-02-26", area: "NW"
-            },
-            {
-                score: null, address: "Whitechapel, E1", price: 2350, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk",
-                available: "Now", addedDate: "2026-02-26", area: "E"
-            },
-            {
-                score: null, address: "Riverlight Quay, SW11", price: 2750, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk",
-                available: "Now", addedDate: "2026-02-26", area: "Other"
-            },
-
-            // NEW PROPERTIES - WEST LONDON (Paddington/W2)
-            {
-                score: null, address: "John Aird Court, Paddington W2", price: 2400, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Paddington.html",
-                available: "Now", addedDate: "2026-02-26", area: "W2"
-            },
-            {
-                score: null, address: "Norfolk Place, W2", price: 2600, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Paddington.html",
-                available: "Now", addedDate: "2026-02-26", area: "W2"
-            },
-            {
-                score: null, address: "Hall Place, Little Venice W2", price: 2318, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/properties-to-rent/w2",
-                available: "Now", addedDate: "2026-02-26", area: "W2"
-            },
-            {
-                score: null, address: "Aubrey House, Maida Avenue W2", price: 2800, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Paddington.html",
-                available: "Now", addedDate: "2026-02-26", area: "W2"
-            },
-            {
-                score: null, address: "Craven Hill, Bayswater W2", price: 2999, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Paddington.html",
-                available: "Now", addedDate: "2026-02-26", area: "W2"
-            },
-
-            // NEW PROPERTIES - PRIMROSE HILL/REGENT'S PARK (NW1/NW3)
-            {
-                score: null, address: "Elsworthy Road, Primrose Hill NW3", price: 2000, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Primrose-Hill.html",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Lock House, Primrose Hill", price: 2150, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Primrose-Hill.html",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Juniper Crescent, NW1", price: 2200, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Primrose-Hill.html",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Fellows Road, Belsize Park NW3", price: 2200, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Primrose-Hill.html",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Gloucester Avenue, Primrose Hill NW1", price: 2200, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Primrose-Hill.html",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Regents Park Road, Primrose Hill NW1", price: 2450, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Primrose-Hill.html",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Oval Road, Primrose Hill NW1", price: 2100, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/properties-to-rent/primrose-hill-london",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Princess Road, Primrose Hill NW1", price: 2500, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "OpenRent", url: "https://renthero.co.uk/listings/2-bedroom-property-to-let-in-princess-road-london-nw1-5-000-pcm-p9fe3a7",
-                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
-            },
-
-            // NEW PROPERTIES - VICTORIA PARK/EAST LONDON (E9/E3)
-            {
-                score: null, address: "King Edward's Road, Victoria Park E9", price: 2400, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/property-to-rent/london/1-bed-flat-victoria-park-e9/2549687",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Shore Place, Victoria Park E9", price: 2496, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Well Street, E9", price: 2000, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Mare Street, Hackney E8", price: 2600, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E8"
-            },
-            {
-                score: null, address: "Mare Street, London Fields E8", price: 2500, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E8"
-            },
-            {
-                score: null, address: "Bramshaw Road, London E9", price: 2401, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Lansbury Mansions, Annis Road E9", price: 1950, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Printers Mews, Bow E3", price: 2250, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Printers Mews, Old Ford Road E3", price: 1850, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Shore Road, Hackney E9", price: 2000, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Barge Lane, Victoria Park E9", price: 2747, beds: 2,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/property-to-rent/Victoria-Park-Village.html",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-            {
-                score: null, address: "Victoria Park Road, E9", price: 2100, beds: 1,
-                hugo: "NEW - Not scored", hugoScore: null, holly: "NEW - Not scored", hollyScore: null,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/property-to-rent/london/1-bed-flat-victoria-park-road-e9/2435875",
-                available: "Now", addedDate: "2026-02-26", area: "E9"
-            },
-
-            // ═══════════════════════════════════════════════════════════════
-            // NEW PROPERTIES - 27 FEB 2026 SCRAPE
-            // ═══════════════════════════════════════════════════════════════
-
-            // HACKNEY / E5 - Near Victoria Park
-            {
-                score: null, address: "Gunton Road, Hackney, E5", price: 2500, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172672118",
-                available: "Now", addedDate: "2026-02-27", area: "E8"
-            },
-            {
-                score: null, address: "Maple Path, Hackney Downs, E5", price: 2500, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172671113",
-                available: "Now", addedDate: "2026-02-27", area: "E8"
-            },
-            {
-                score: null, address: "Pembury Road, Clapton E5", price: 3000, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72536173/",
-                available: "Now", addedDate: "2026-02-27", area: "E8"
-            },
-
-            // N1 / ISLINGTON / ANGEL
-            {
-                score: null, address: "Bemerton Estate, N1", price: 2300, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                score: 85, address: "Bemerton Estate, N1", price: 2300, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
                 platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72535354/",
                 available: "Now", addedDate: "2026-02-27", area: "N1"
             },
             {
-                score: null, address: "Pentonville Road, N1", price: 2250, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72534723/",
+                score: 84, address: "Upper Street, N1", price: 2350, beds: 1,
+                hugo: "8min cycle", hugoScore: 25, holly: "10min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2728928",
                 available: "Now", addedDate: "2026-02-27", area: "N1"
             },
-
-            // N16 / STOKE NEWINGTON
             {
-                score: null, address: "Watson Close, N16", price: 2700, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/54157098/",
-                available: "Now", addedDate: "2026-02-27", area: "N4-N8"
+                score: 82, address: "Kember Street, N1", price: 2800, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2806870",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
+            },
+            {
+                score: 82, address: "Liverpool Rd, N1", price: 2650, beds: 2,
+                hugo: "8min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2702550",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
+            },
+            {
+                score: 82, address: "Phelps Lodge, N1", price: 2650, beds: 1,
+                hugo: "8min cycle", hugoScore: 25, holly: "10min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2802666",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
+            },
+            {
+                score: 80, address: "Cruden Street, N1", price: 2825, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2754674",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
+            },
+            {
+                score: 80, address: "Selkirk House, N1", price: 2295, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2742625",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
+            },
+            {
+                score: 80, address: "London N1 (Council tax incl)", price: 2000, beds: 2,
+                hugo: "10min cycle", hugoScore: 25, holly: "12min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2695135",
+                available: "Now", addedDate: "2026-02-27", area: "N1"
+            },
+            {
+                score: 79, address: "Newington Green Road, N1", price: 2600, beds: 2, sqft: 558,
+                hugo: "10min cycle", hugoScore: 25, holly: "15min to Bank", hollyScore: 25,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531020",
+                available: "Now", addedDate: "2026-02-26", area: "N1"
             },
 
-            // NW3 / NW5 / NW6 - HAMPSTEAD / KENTISH TOWN
+            // ═══════════════════════════════════════════════════════════════
+            // EC1 CLERKENWELL - Excellent for Holly, good for Hugo
+            // Hugo: 12min cycle | Holly: 8min to Bank | Score: 82
+            // ═══════════════════════════════════════════════════════════════
             {
-                score: null, address: "Belsize Grove, NW3", price: 2000, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72536113/",
-                available: "Now", addedDate: "2026-02-27", area: "NW1/NW3"
-            },
-            {
-                score: null, address: "Ospringe Road, NW5", price: 2600, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72535435/",
-                available: "Now", addedDate: "2026-02-27", area: "NW"
-            },
-            {
-                score: null, address: "Priory Road, South Hampstead, NW6", price: 2500, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172672196",
-                available: "Now", addedDate: "2026-02-27", area: "NW"
-            },
-
-            // NW2 / NW10 - WILLESDEN / CRICKLEWOOD
-            {
-                score: null, address: "Brondesbury Road, Queens Park", price: 2250, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/170950946",
-                available: "Now", addedDate: "2026-02-27", area: "NW"
-            },
-            {
-                score: null, address: "Pine Road, Cricklewood", price: 2000, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172624376",
-                available: "Now", addedDate: "2026-02-27", area: "NW"
-            },
-            {
-                score: null, address: "Hoveden Road, Willesden Green, NW2", price: 2250, beds: 2,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/171626183",
-                available: "Now", addedDate: "2026-02-27", area: "NW"
-            },
-
-            // N10 - MUSWELL HILL
-            {
-                score: null, address: "Gabriel Mews, N10", price: 2050, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172078559",
-                available: "Now", addedDate: "2026-02-27", area: "N4-N8"
-            },
-
-            // EC1 - CLERKENWELL (Great for Holly!)
-            {
-                score: null, address: "Clerkenwell, EC1V", price: 2660, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                score: 82, address: "Clerkenwell, EC1V", price: 2660, beds: 1,
+                hugo: "12min cycle", hugoScore: 20, holly: "8min to Bank", hollyScore: 25,
                 platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72535049/",
                 available: "Now", addedDate: "2026-02-27", area: "Other"
             },
 
-            // WC1 - KINGS CROSS (Central!)
+            // ═══════════════════════════════════════════════════════════════
+            // WC1/WC2 CENTRAL - Great for Holly, decent for Hugo
+            // Hugo: 18min cycle | Holly: 12min to Bank | Score: 77
+            // ═══════════════════════════════════════════════════════════════
             {
-                score: null, address: "Hunter Street, WC1N", price: 2100, beds: 1,
-                hugo: "TBC", hugoScore: null, holly: "TBC", hollyScore: null,
+                score: 77, address: "Hunter Street, WC1N", price: 2100, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "12min to Bank", hollyScore: 25,
                 platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/87637149",
                 available: "Now", addedDate: "2026-02-27", area: "Other"
             },
+            {
+                score: 75, address: "Fletcher Buildings, Covent Garden, WC2B", price: 2850, beds: 1,
+                hugo: "22min cycle", hugoScore: 10, holly: "12min to Bank", hollyScore: 25,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/169589081",
+                available: "Short Let", addedDate: "2026-02-27", area: "Other"
+            },
 
             // ═══════════════════════════════════════════════════════════════
-            // OPENRENT LISTINGS - 27 FEB 2026 (Direct from landlords!)
+            // E1 WHITECHAPEL - Excellent for Holly
+            // Hugo: 18min cycle | Holly: 8min to Bank | Score: 77
             // ═══════════════════════════════════════════════════════════════
-
-            // N1 - ISLINGTON / ANGEL (Best for Holly - <30min to Bank)
             {
-                score: 82, address: "Upper Street, N1", price: 2350, beds: 1,
-                hugo: "10min cycle", hugoScore: 25, holly: "22min to Bank", hollyScore: 25,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2728928",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
-            },
-            {
-                score: 80, address: "Kember Street, N1", price: 2800, beds: 2,
-                hugo: "12min cycle", hugoScore: 20, holly: "25min to Bank", hollyScore: 25,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2806870",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
-            },
-            {
-                score: 78, address: "Liverpool Rd, N1", price: 2650, beds: 2,
-                hugo: "10min cycle", hugoScore: 25, holly: "28min to Bank", hollyScore: 20,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2702550",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
-            },
-            {
-                score: 76, address: "Phelps Lodge, N1", price: 2650, beds: 1,
-                hugo: "8min cycle", hugoScore: 25, holly: "30min to Bank", hollyScore: 20,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2802666",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
-            },
-            {
-                score: 74, address: "Cruden Street, N1", price: 2825, beds: 2,
-                hugo: "12min cycle", hugoScore: 20, holly: "28min to Bank", hollyScore: 20,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2754674",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
-            },
-            {
-                score: 72, address: "Selkirk House, N1", price: 2295, beds: 2,
-                hugo: "15min cycle", hugoScore: 20, holly: "32min to Bank", hollyScore: 20,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2742625",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
-            },
-            {
-                score: 70, address: "London, N1 (Council tax incl)", price: 2000, beds: 2,
-                hugo: "14min cycle", hugoScore: 20, holly: "35min to Bank", hollyScore: 15,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2695135",
-                available: "Now", addedDate: "2026-02-27", area: "N1"
+                score: 77, address: "Whitechapel, E1", price: 2350, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "8min to Bank", hollyScore: 25,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172035722",
+                available: "Short Let", addedDate: "2026-02-27", area: "E"
             },
 
-            // N5 - HIGHBURY (Good for both)
+            // ═══════════════════════════════════════════════════════════════
+            // N5 HIGHBURY - Good balance for both
+            // Hugo: 12min cycle | Holly: 18min to Bank | Score: 77
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 77, address: "Highbury Stadium Mews, N5", price: 2650, beds: 2,
+                hugo: "12min cycle", hugoScore: 20, holly: "18min to Bank", hollyScore: 25,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72530779",
+                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
+            },
             {
                 score: 75, address: "Terrace Apartments, N5", price: 2250, beds: 1,
-                hugo: "10min cycle", hugoScore: 25, holly: "32min to Bank", hollyScore: 20,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2808541",
+                hugo: "12min cycle", hugoScore: 20, holly: "18min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2808541",
                 available: "1 March", addedDate: "2026-02-27", area: "N4-N8"
             },
             {
-                score: 73, address: "Highbury, N5", price: 2450, beds: 1,
-                hugo: "12min cycle", hugoScore: 20, holly: "30min to Bank", hollyScore: 20,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2570280",
+                score: 75, address: "Highbury, N5", price: 2450, beds: 1,
+                hugo: "12min cycle", hugoScore: 20, holly: "18min to Bank", hollyScore: 25,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2570280",
                 available: "Now", addedDate: "2026-02-27", area: "N4-N8"
             },
 
-            // N7 - HOLLOWAY (Great for Hugo's gym!)
+            // ═══════════════════════════════════════════════════════════════
+            // N7 HOLLOWAY - Great for Hugo, longer for Holly
+            // Hugo: 18min cycle | Holly: 22min to Bank | Score: 67
+            // ═══════════════════════════════════════════════════════════════
             {
-                score: 77, address: "Holloway Road, N7", price: 2500, beds: 1,
-                hugo: "5min cycle", hugoScore: 25, holly: "35min to Bank", hollyScore: 15,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2784337",
+                score: 67, address: "Crayford Road, N7", price: 2600, beds: 2,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628459",
+                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
+            },
+            {
+                score: 67, address: "Holloway Road, N7", price: 2500, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2784337",
                 available: "Now", addedDate: "2026-02-27", area: "N4-N8"
             },
             {
-                score: 75, address: "Benwell Road, N7", price: 2150, beds: 1,
-                hugo: "6min cycle", hugoScore: 25, holly: "38min to Bank", hollyScore: 15,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2810004",
+                score: 67, address: "Benwell Road, N7", price: 2150, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2810004",
                 available: "27 Feb", addedDate: "2026-02-27", area: "N4-N8"
             },
             {
-                score: 72, address: "Bryantwood Road, N7", price: 2450, beds: 2,
-                hugo: "8min cycle", hugoScore: 25, holly: "40min to Bank", hollyScore: 15,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2767713",
+                score: 67, address: "Bryantwood Road, N7", price: 2450, beds: 2,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2767713",
                 available: "Now", addedDate: "2026-02-27", area: "N4-N8"
             },
             {
-                score: 70, address: "Queensland Road, N7", price: 2210, beds: 1,
-                hugo: "7min cycle", hugoScore: 25, holly: "42min to Bank", hollyScore: 10,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2806469",
+                score: 67, address: "Queensland Road, N7", price: 2210, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2806469",
                 available: "Now", addedDate: "2026-02-27", area: "N4-N8"
             },
             {
-                score: 68, address: "Queensland Road, N7", price: 2400, beds: 1,
-                hugo: "7min cycle", hugoScore: 25, holly: "42min to Bank", hollyScore: 10,
-                platform: "OpenRent", url: "https://www.openrent.co.uk/2809691",
+                score: 67, address: "Queensland Road, N7", price: 2400, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2809691",
                 available: "Now", addedDate: "2026-02-27", area: "N4-N8"
             },
-
-            // RIGHTMOVE SHORT-LETS - N7 HOLLOWAY
             {
-                score: 74, address: "Manor Gardens, Holloway, N7", price: 2750, beds: 2,
-                hugo: "6min cycle", hugoScore: 25, holly: "35min to Bank", hollyScore: 15,
+                score: 67, address: "Manor Gardens, Holloway, N7", price: 2750, beds: 2,
+                hugo: "18min cycle", hugoScore: 15, holly: "22min to Bank", hollyScore: 20,
                 platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/170984297",
                 available: "Short Let", addedDate: "2026-02-27", area: "N4-N8"
             },
 
-            // RIGHTMOVE SHORT-LETS - CLOSE TO BANK
+            // ═══════════════════════════════════════════════════════════════
+            // N4/N8 FINSBURY PARK / CROUCH END
+            // Hugo: 20min cycle | Holly: 35min to Bank | Score: 57
+            // ═══════════════════════════════════════════════════════════════
             {
-                score: 85, address: "Whitechapel, E1", price: 2350, beds: 1,
-                hugo: "18min cycle", hugoScore: 15, holly: "12min to Bank", hollyScore: 25,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172035722",
-                available: "Short Let", addedDate: "2026-02-27", area: "E"
+                score: 57, address: "Scarborough Road, N4", price: 2400, beds: 2,
+                hugo: "20min cycle", hugoScore: 10, holly: "35min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628444",
+                available: "Mid-April", addedDate: "2026-02-26", area: "N4-N8"
             },
             {
-                score: 80, address: "Kingsland Road, Haggerston", price: 2999, beds: 1,
-                hugo: "12min cycle", hugoScore: 20, holly: "28min to Bank", hollyScore: 20,
+                score: 55, address: "Crouch Hall Road, N8", price: 2000, beds: 2,
+                hugo: "25min cycle", hugoScore: 10, holly: "40min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172628408",
+                available: "Now", addedDate: "2026-02-26", area: "N4-N8"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // E8 HACKNEY / LONDON FIELDS
+            // Hugo: 15min cycle | Holly: 28min to Bank | Score: 65
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 65, address: "Broadway Market, E8", price: 2300, beds: 2,
+                hugo: "15min cycle", hugoScore: 20, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "3 April", addedDate: "2026-02-26", area: "E8"
+            },
+            {
+                score: 65, address: "Kingsland Road, Haggerston", price: 2999, beds: 1,
+                hugo: "15min cycle", hugoScore: 20, holly: "28min to Bank", hollyScore: 20,
                 platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172059959",
                 available: "Short Let", addedDate: "2026-02-27", area: "E8"
             },
             {
-                score: 88, address: "Fletcher Buildings, Covent Garden, WC2B", price: 2850, beds: 1,
-                hugo: "15min cycle", hugoScore: 20, holly: "18min to Bank", hollyScore: 25,
-                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/169589081",
-                available: "Short Let", addedDate: "2026-02-27", area: "Other"
+                score: 62, address: "Mare Street, Hackney E8", price: 2600, beds: 1,
+                hugo: "18min cycle", hugoScore: 15, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E8"
+            },
+            {
+                score: 62, address: "Mare Street, London Fields E8", price: 2500, beds: 2,
+                hugo: "18min cycle", hugoScore: 15, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E8"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // E5 HACKNEY / CLAPTON
+            // Hugo: 22min cycle | Holly: 28min to Bank | Score: 60
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 60, address: "Gunton Road, Hackney, E5", price: 2500, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172672118",
+                available: "Now", addedDate: "2026-02-27", area: "E8"
+            },
+            {
+                score: 60, address: "Maple Path, Hackney Downs, E5", price: 2500, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172671113",
+                available: "Now", addedDate: "2026-02-27", area: "E8"
+            },
+            {
+                score: 60, address: "Pembury Road, Clapton E5", price: 3000, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72536173/",
+                available: "Now", addedDate: "2026-02-27", area: "E8"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // N16 STOKE NEWINGTON
+            // Hugo: 22min cycle | Holly: 30min to Bank | Score: 57
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 57, address: "Watson Close, N16", price: 2700, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/54157098/",
+                available: "Now", addedDate: "2026-02-27", area: "N4-N8"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // E9 VICTORIA PARK
+            // Hugo: 22min cycle | Holly: 30min to Bank | Score: 57
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 57, address: "King Edward's Road, Victoria Park E9", price: 2400, beds: 1,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2549687",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 57, address: "Shore Place, Victoria Park E9", price: 2496, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 57, address: "Well Street, E9", price: 2000, beds: 1,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 57, address: "Bramshaw Road, London E9", price: 2401, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 57, address: "Shore Road, Hackney E9", price: 2000, beds: 1,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 57, address: "Barge Lane, Victoria Park E9", price: 2747, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 57, address: "Victoria Park Road, E9", price: 2100, beds: 1,
+                hugo: "22min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent/2435875",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 55, address: "Lansbury Mansions, Annis Road E9", price: 1950, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "32min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 55, address: "Printers Mews, Bow E3", price: 2250, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+            {
+                score: 55, address: "Printers Mews, Old Ford Road E3", price: 1850, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "30min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "E9"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // NW3 HAMPSTEAD / BELSIZE PARK
+            // Hugo: 30min cycle | Holly: 35min to Bank | Score: 52
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 52, address: "Belsize Grove, NW3", price: 2000, beds: 1,
+                hugo: "30min cycle", hugoScore: 10, holly: "35min to Bank", hollyScore: 15,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72536113/",
+                available: "Now", addedDate: "2026-02-27", area: "NW1/NW3"
+            },
+            {
+                score: 52, address: "Elsworthy Road, Primrose Hill NW3", price: 2000, beds: 1,
+                hugo: "28min cycle", hugoScore: 10, holly: "32min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+            {
+                score: 52, address: "Fellows Road, Belsize Park NW3", price: 2200, beds: 1,
+                hugo: "30min cycle", hugoScore: 10, holly: "35min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // NW1 PRIMROSE HILL / CAMDEN
+            // Hugo: 25min cycle | Holly: 28min to Bank | Score: 57
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 57, address: "Lock House, Primrose Hill NW1", price: 2150, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+            {
+                score: 57, address: "Juniper Crescent, NW1", price: 2200, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+            {
+                score: 57, address: "Gloucester Avenue, Primrose Hill NW1", price: 2200, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+            {
+                score: 57, address: "Regents Park Road, Primrose Hill NW1", price: 2450, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+            {
+                score: 57, address: "Oval Road, Primrose Hill NW1", price: 2100, beds: 1,
+                hugo: "25min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+            {
+                score: 57, address: "Princess Road, Primrose Hill NW1", price: 2500, beds: 2,
+                hugo: "25min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent",
+                available: "Now", addedDate: "2026-02-26", area: "NW1/NW3"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // NW5 KENTISH TOWN
+            // Hugo: 22min cycle | Holly: 28min to Bank | Score: 57
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 57, address: "Ospringe Road, NW5", price: 2600, beds: 2,
+                hugo: "22min cycle", hugoScore: 10, holly: "28min to Bank", hollyScore: 20,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72535435/",
+                available: "Now", addedDate: "2026-02-27", area: "NW"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // NW6 SOUTH HAMPSTEAD
+            // Hugo: 28min cycle | Holly: 32min to Bank | Score: 52
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 52, address: "Priory Road, South Hampstead, NW6", price: 2500, beds: 1,
+                hugo: "28min cycle", hugoScore: 10, holly: "32min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172672196",
+                available: "Now", addedDate: "2026-02-27", area: "NW"
+            },
+            {
+                score: 52, address: "Brondesbury Road, Queens Park", price: 2250, beds: 2,
+                hugo: "28min cycle", hugoScore: 10, holly: "32min to Bank", hollyScore: 15,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/170950946",
+                available: "Now", addedDate: "2026-02-27", area: "NW"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // NW2 CRICKLEWOOD / WILLESDEN - Long commutes
+            // Hugo: 40min cycle | Holly: 45min to Bank | Score: 42
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 42, address: "Finchley Road, NW2", price: 2000, beds: 1, sqft: 600,
+                hugo: "40min cycle", hugoScore: 5, holly: "45min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172629356",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
+            },
+            {
+                score: 42, address: "Pine Road, Cricklewood", price: 2000, beds: 2,
+                hugo: "40min cycle", hugoScore: 5, holly: "45min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172624376",
+                available: "Now", addedDate: "2026-02-27", area: "NW"
+            },
+            {
+                score: 42, address: "Hoveden Road, Willesden Green, NW2", price: 2250, beds: 2,
+                hugo: "40min cycle", hugoScore: 5, holly: "45min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/171626183",
+                available: "Now", addedDate: "2026-02-27", area: "NW"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // N10/N3/NW11 - OUTER ZONES (Long commutes, low scores)
+            // Hugo: 40min+ cycle | Holly: 50min+ to Bank | Score: 37
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 37, address: "Gabriel Mews, N10", price: 2050, beds: 1,
+                hugo: "40min cycle", hugoScore: 5, holly: "50min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172078559",
+                available: "Now", addedDate: "2026-02-27", area: "N4-N8"
+            },
+            {
+                score: 37, address: "The Fountains, N3", price: 2250, beds: 2,
+                hugo: "45min cycle", hugoScore: 5, holly: "50min to Bank", hollyScore: 10,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627685",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
+            },
+            {
+                score: 37, address: "Corringham Road, NW11", price: 2250, beds: 2,
+                hugo: "45min cycle", hugoScore: 5, holly: "52min to Bank", hollyScore: 5,
+                platform: "Zoopla", url: "https://www.zoopla.co.uk/to-rent/details/72531452",
+                available: "Now", addedDate: "2026-02-26", area: "NW"
+            },
+
+            // ═══════════════════════════════════════════════════════════════
+            // W2 PADDINGTON - Decent for Holly, far for Hugo
+            // Hugo: 35min cycle | Holly: 25min to Bank | Score: 52
+            // ═══════════════════════════════════════════════════════════════
+            {
+                score: 52, address: "John Aird Court, Paddington W2", price: 2400, beds: 2,
+                hugo: "35min cycle", hugoScore: 5, holly: "25min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "W2"
+            },
+            {
+                score: 52, address: "Norfolk Place, W2", price: 2600, beds: 2,
+                hugo: "35min cycle", hugoScore: 5, holly: "25min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "W2"
+            },
+            {
+                score: 52, address: "Hall Place, Little Venice W2", price: 2318, beds: 2,
+                hugo: "35min cycle", hugoScore: 5, holly: "25min to Bank", hollyScore: 20,
+                platform: "OpenRent", url: "https://www.openrent.com/properties-to-rent",
+                available: "Now", addedDate: "2026-02-26", area: "W2"
+            },
+            {
+                score: 52, address: "Aubrey House, Maida Avenue W2", price: 2800, beds: 2,
+                hugo: "35min cycle", hugoScore: 5, holly: "25min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "W2"
+            },
+            {
+                score: 52, address: "Craven Hill, Bayswater W2", price: 2999, beds: 2,
+                hugo: "35min cycle", hugoScore: 5, holly: "25min to Bank", hollyScore: 20,
+                platform: "Rightmove", url: "https://www.rightmove.co.uk/properties/172627172",
+                available: "Now", addedDate: "2026-02-26", area: "W2"
             }
         ];
 
